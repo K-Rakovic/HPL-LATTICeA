@@ -48,9 +48,9 @@ class RepresentationsPathology():
 				):
 
 		### Input data variables.
-		self.image_height   = data.patch_h
-		self.image_width    = data.patch_w
-		self.image_channels = data.n_channels
+		self.image_height   = 224 # data.patch_h
+		self.image_width    = 224 # data.patch_w
+		self.image_channels = 3 # data.n_channels
 		self.batch_size     = data.batch_size
 
 		### Architecture parameters.
@@ -82,7 +82,7 @@ class RepresentationsPathology():
 
 		self.lambda_ = lambda_
 
-		self.num_samples = data.training.images.shape[0]
+		self.num_samples = 1000000 # data.training.images.shape[0]
 		all_indx = list(range(self.num_samples))
 		random.shuffle(all_indx)
 		self.selected_indx = np.array(sorted(all_indx[:10000]))
