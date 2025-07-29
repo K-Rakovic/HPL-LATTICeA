@@ -24,11 +24,11 @@ To build the environment and run the main code (feature extraction, mapping new 
 ## 1. WSI preprocessing
 We preprocess whole slide images (WSIs) into small image tiles, of 224x224 pixels in diameter at a resolution of 1.8 microns per pixel (5x magnification) using [this script](./utilities/tiling/tile_wsi.py). A sample configuration file is provided [here](./utilities/tiling/configs/tile_wsi_config.json). This script will create a ```.pkl``` file for each WSI, containing the tile images and their metadata. 
 
-They are then packaged into ```.h5``` files with [this script](./utilities/tiling/make_hdf5.py), with the following minimum dataset structure: \
-- `img`: Tile images (as numpy arrays) \
-- `tiles`: Tile coordinates/filenames \
-- `slides`: Slide names \
-- `samples`: Patient names \ 
+They are then packaged into ```.h5``` files with [this script](./utilities/tiling/make_hdf5.py), with the following minimum dataset structure:  
+- `img`: Tile images (as numpy arrays)  
+- `tiles`: Tile coordinates/filenames  
+- `slides`: Slide names  
+- `samples`: Patient names   
 
 Alternatively, you can use existing tiling code such as that used in the [DeepPath pipeline](https://github.com/ncoudray/DeepPATH) following the instructions in the [original readme](https://github.com/AdalbertoCq/Histomorphological-Phenotype-Learning/blob/master/README.md) or other code you are familiar with. The only requirement is that the resulting ```.h5``` file adheres to the above minimum structure. 
 
@@ -36,9 +36,9 @@ Alternatively, you can use existing tiling code such as that used in the [DeepPa
 The code relies on a specific directory structure and ```.h5``` file content to run the flow. The following sections detail the requirements for the workspace setup.
 
 ### Directory Structure
-The code will make the following assumptions with respect to where the datasets, model training outputs (ie. model weights), and image representations are stored: \
+The code will make the following assumptions with respect to where the datasets, model training outputs (ie. model weights), and image representations are stored:  
 
-- Datasets: \
+- Datasets:  
     - Dataset folder follows the following structure:
         - datasets/**dataset_name**/**marker_name**/patches_h**tile_size**_w**tile_size** \
         - E.g.: `./datasets/LATTICeA_5x/he/patches_h224_w224`
