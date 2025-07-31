@@ -95,3 +95,9 @@ def load_clinical():
     survival = survival[survival['2015_who'] != 'Invasive mucinous adenocarcinoma (IMA)']
 
     return clinpath, survival, patterns_samples
+
+def load_genetics():
+    genetics = pd.read_csv('/nfs/home/users/krakovic/sharedscratch/HPL-LATTICeA/utilities/files/LUAD-LATTICeA/LatticeDatabase_withgenetics.tsv', sep='\t')
+    genetics['samples'] = genetics['case_num'].apply(lambda x: f"ACA_{x:04d}")
+
+    return genetics
