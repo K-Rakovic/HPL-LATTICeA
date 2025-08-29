@@ -1,10 +1,11 @@
 import numpy as np
+import os
 import pandas as pd
 from sklearn.preprocessing import normalize
 
 
-def load_clinical():
-    clinpath = pd.read_csv('/mnt/cephfs/home/users/krakovic/sharedscratch/datasets/LATTICeA/latticea_master_clinicopathological.csv')
+def load_clinical(main_path=os.path.abspath(os.path.join(os.getcwd(), '..'))):
+    clinpath = pd.read_csv(os.path.join(main_path, 'utilities/files/LUAD-LATTICeA/latticea_master_clinicopathological.csv'))
 
     clinpath = clinpath.sort_values(by='Case Number').reset_index()
     clinpath['Case Number'] = clinpath['Case Number'].astype(str)
@@ -96,8 +97,8 @@ def load_clinical():
 
     return clinpath, survival, patterns_samples
 
-def load_genetics():
-    genetics = pd.read_csv('/nfs/home/users/krakovic/sharedscratch/HPL-LATTICeA/utilities/files/LUAD-LATTICeA/LatticeDatabase_withgenetics.tsv', sep='\t')
+def load_genetics(main_path=os.path.abspath(os.path.join(os.getcwd(), '..'))):
+    genetics = pd.read_csv(os.path.join(main_path, 'utilities/files/LUAD-LATTICeA/LatticeDatabase_withgenetics.tsv'), sep='\t')
     genetics['samples'] = genetics['case_num'].apply(lambda x: f"ACA_{x:04d}")
 
     return genetics

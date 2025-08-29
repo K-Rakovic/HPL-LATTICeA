@@ -7,12 +7,12 @@ library(ComplexHeatmap)
 library(pheatmap)
 library(exCITingpath)
 
-hallmarks_ssgsea <- read_csv("C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\HALLMARKS_ssGSEA_TCGA_250424.csv") %>% 
+hallmarks_ssgsea <- read_csv("\\Temposeq\\TCGA_20250424\\HALLMARKS_ssGSEA_TCGA_250424.csv") %>% 
   column_to_rownames(var = "...1")
 
-tcga_tpm <- read_csv("C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\TCGA-LUAD_star_tpm_symbols.csv")
+tcga_tpm <- read_csv("\\Temposeq\\TCGA_20250424\\TCGA-LUAD_star_tpm_symbols.csv")
 
-tcga_malignant <- read_csv("C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Documents\\PhD_Workspace\\HE_LUAD_5x_paper\\tcga_agg_by_sum_5sc.csv") %>% 
+tcga_malignant <- read_csv("\\Documents\\PhD_Workspace\\HE_LUAD_5x_paper\\tcga_agg_by_sum_5sc.csv") %>% 
   dplyr:::select(c("samples", "Hot, cohesive", "Hot, discohesive", "HPC 13", "Cold, discohesive", 'Cold, cohesive')) %>% 
   filter(., samples %in% colnames(tcga_tpm)) %>% 
   arrange(samples) %>% 
@@ -41,7 +41,7 @@ p <- Heatmap(hallmarks_corr,
              row_dend_width = unit(4, "mm"),
              column_dend_height = unit(4, "mm"))  
 
-pdf(file="C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\TCGA_HALLMARKS_WSICORR_250424.pdf", width = 6, height = 10.2)
+pdf(file="\\Temposeq\\TCGA_20250424\\TCGA_HALLMARKS_WSICORR_250424.pdf", width = 6, height = 10.2)
 draw(p, heatmap_legend_side = "left", annotation_legend_side = "left", padding = unit(c(2, 2, 2, 40), "mm"))
 dev.off()
 
@@ -69,7 +69,7 @@ p <- Heatmap(hallmarks_corr,
              show_column_names = FALSE,
              top_annotation = col_anno)
 
-pdf(file="C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\TCGA_HALLMARKS_WSICORR_250424_col_labs.pdf", width = 6, height = 10.2)
+pdf(file="\\Temposeq\\TCGA_20250424\\TCGA_HALLMARKS_WSICORR_250424_col_labs.pdf", width = 6, height = 10.2)
 draw(p, heatmap_legend_side = "left", annotation_legend_side = "left", padding = unit(c(2, 2, 2, 40), "mm"))
 dev.off()
 
@@ -126,14 +126,14 @@ p <- Heatmap(
   }
 )
 
-pdf(file="C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\TCGA_HALLMARKS_WSICORR_250424_col_labs_stats.pdf", width = 6.2, height = 10.2)
+pdf(file="\\Temposeq\\TCGA_20250424\\TCGA_HALLMARKS_WSICORR_250424_col_labs_stats.pdf", width = 6.2, height = 10.2)
 draw(p, heatmap_legend_side = "left", annotation_legend_side = "left", padding = unit(c(2, 2, 2, 40), "mm"))
 dev.off()
 
 ###
 
 # Correlation with all pathways
-gocc_ssgsea <- read_csv("C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\GO_CC_ssGSEA_TCGA_250424.csv") %>% 
+gocc_ssgsea <- read_csv("\\Temposeq\\TCGA_20250424\\GO_CC_ssGSEA_TCGA_250424.csv") %>% 
   column_to_rownames(var = "...1")
 
 gocc_cor <- cor(t(gocc_ssgsea),
@@ -230,7 +230,7 @@ p <- Heatmap(
   }
 )
 
-pdf(file="C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\TCGA_GOCC_top10_WSIcorr_stats_250424.pdf", width = 6, height = 4)
+pdf(file="\\Temposeq\\TCGA_20250424\\TCGA_GOCC_top10_WSIcorr_stats_250424.pdf", width = 6, height = 4)
 draw(p, heatmap_legend_side = "left", annotation_legend_side = "left", padding = unit(c(2, 2, 2, 20), "mm"))
 dev.off()
 
@@ -321,7 +321,7 @@ Heatmap(
 ###
 
 # Correlation with all pathways
-gobp_ssgsea <- read_csv("C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\GO_BP_ssGSEA_TCGA_250424.csv") %>% 
+gobp_ssgsea <- read_csv("\\Temposeq\\TCGA_20250424\\GO_BP_ssGSEA_TCGA_250424.csv") %>% 
   column_to_rownames(var = "...1")
 
 gobp_cor <- cor(t(gobp_ssgsea),
@@ -429,6 +429,6 @@ p <- Heatmap(
   }
 )
 
-pdf(file="C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\TCGA_GOBP_top10_WSIcorr_stats_250424.pdf", width = 6, height = 4)
+pdf(file="\\Temposeq\\TCGA_20250424\\TCGA_GOBP_top10_WSIcorr_stats_250424.pdf", width = 6, height = 4)
 draw(p, heatmap_legend_side = "left", annotation_legend_side = "left", padding = unit(c(2, 2, 2, 20), "mm"))
 dev.off()

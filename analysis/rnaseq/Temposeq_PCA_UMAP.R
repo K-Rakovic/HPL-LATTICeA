@@ -2,11 +2,11 @@ library(DESeq2)
 library(tidyverse)
 library(umap)
 
-load("/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/LUADChohort.RData")
+load("./Temposeq/LUADChohort.RData")
 
 # Parsing metadata  -----------------------------------------------------------
 
-cluster_annotations <- read_csv('/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
+cluster_annotations <- read_csv('./Temposeq/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
   column_to_rownames("...1")
 
 ## Reformatting the way cores are named to align with my HPC annotation dataframe
@@ -115,7 +115,7 @@ ggplot(pca_data, aes(x = PC3, y = PC4, color = Condition)) +
 
 # 
 # ggsave("PCA_Pure_cases.pdf",
-#        path = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/Plots/Feb25_cleaned_superclusters",
+#        path = "./Temposeq/Plots/Feb25_cleaned_superclusters",
 #        width = 6,
 #        height = 3.76,
 #        units = "in",
@@ -147,7 +147,7 @@ ggplot(umap_data, aes(x = UMAP1, y = UMAP2)) +
   labs(color = "")
 
 ggsave("UMAP_Pure_Cases.pdf",
-       path = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters/",
+       path = "./Temposeq/final_figures/v250331_superclusters/",
        width = 6.5,
        height = 3.76,
        units = "in",

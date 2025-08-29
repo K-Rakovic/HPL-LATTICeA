@@ -40,24 +40,24 @@ The code will make the following assumptions with respect to where the datasets,
 
 - Datasets:  
     - Dataset folder follows the following structure:
-        - datasets/**dataset_name**/**marker_name**/patches_h**tile_size**_w**tile_size** \
+        - datasets/**dataset_name**/**marker_name**/patches_h**tile_size**_w**tile_size** 
         - E.g.: `./datasets/LATTICeA_5x/he/patches_h224_w224`
 - Data_model_output: \
-    - Output folder for self-supervised trained models. \
+    - Output folder for self-supervised trained models. 
     - Follows the following structure: \
-        - data_model_output/**model_name**/**dataset_name**/h**tile_size**_w**tile_size**_n3_zdim**latent_space_size** \
-        - E.g.: `./data_model_output/BarlowTwins_3/LATTICeA_5x/h224_w224_n3_zdim128` \
-- Results: \
-    - Output folder for self-supervised representations results. \
-    - This folder will contain the representation and clustering data \
-    - Follows the following structure: \
-        - results/**model_name**/**dataset_name**/h**tile_size**_w**tile_size**_n3_zdim**latent_space_size** \
-        - E.g.: `./results/BarlowTwins_3/LATTICeA_5x/h224_w224_n3_zdim128` \
+        - data_model_output/**model_name**/**dataset_name**/h**tile_size**_w**tile_size**_n3_zdim**latent_space_size** 
+        - E.g.: `./data_model_output/BarlowTwins_3/LATTICeA_5x/h224_w224_n3_zdim128` 
+- Results: 
+    - Output folder for self-supervised representations results. 
+    - This folder will contain the representation and clustering data 
+    - Follows the following structure: 
+        - results/**model_name**/**dataset_name**/h**tile_size**_w**tile_size**_n3_zdim**latent_space_size** 
+        - E.g.: `./results/BarlowTwins_3/LATTICeA_5x/h224_w224_n3_zdim128` 
 
-We use the following variable names to refer to the above directories: \
-- **dataset_name**: `LATTICeA_5x` \
-- **marker_name**: `he` \
-- **tile_size**: `224` \
+We use the following variable names to refer to the above directories: 
+- **dataset_name**: `LATTICeA_5x` 
+- **marker_name**: `he` 
+- **tile_size**: `224` 
 
 ## 3. Feature extraction
 This step extracts features from tiles using the self-supervised model. 
@@ -73,10 +73,10 @@ python ./run_representationspathology_projection.py
 ## 4. Background and artefact removal
 We map an initial set of clusters to the self-supervised representations, which have been previously annotated with as to whether they contain background regions or artefacts such as areas of blurring, air bubbles or out-of-focus regions. 
 
-The steps to do this are as follows: \
-1. Download the cluster configuration  \
-2. Use [this notebook](./utilities/tile_cleaning/process_external_dataset_review_clusters.ipynb) to generate ```.pkl``` files containing the file indexes (in the original ```.h5``` file) that are to be removed. \
-3. Remove these tiles from the ```.h5``` file: \
+The steps to do this are as follows: 
+1. Download the cluster configuration  
+2. Use [this notebook](./utilities/tile_cleaning/process_external_dataset_review_clusters.ipynb) to generate ```.pkl``` files containing the file indexes (in the original ```.h5``` file) that are to be removed. 
+3. Remove these tiles from the ```.h5``` file: 
 
 ```
 python3 ./utilities/tile_cleaning/remove_indexes_h5.py 
@@ -106,7 +106,7 @@ At this point, the result is a ```.csv``` file containing the cluster assignatio
 
 From here, you can proceed to using these as a substrate for further analysis, such as survival analysis or integration with other data modalities. 
 
-If you wish to visualise the tiles in each cluster from your data, you can use the following script: \
+If you wish to visualise the tiles in each cluster from your data, you can use the following script: 
 
 ```
 python ./utilities/visualizations/cluster_images.py

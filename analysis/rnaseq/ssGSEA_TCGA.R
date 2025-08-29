@@ -9,10 +9,10 @@ library(BiocParallel)
 library(parallel)
 library('exCITingpath')
 
-tcga_tpm <- read_csv("C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\TCGA-LUAD_star_tpm_symbols.csv") %>% 
+tcga_tpm <- read_csv("Temposeq\\TCGA_20250424\\TCGA-LUAD_star_tpm_symbols.csv") %>% 
   column_to_rownames(var = "gene")
 
-tcga_malignant <- read_csv("C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Documents\\PhD_Workspace\\HE_LUAD_5x_paper\\tcga_agg_by_sum_5sc.csv") %>% 
+tcga_malignant <- read_csv("Documents\\PhD_Workspace\\HE_LUAD_5x_paper\\tcga_agg_by_sum_5sc.csv") %>% 
   dplyr:::select(c("samples", "Hot, cohesive", "Hot, discohesive", "HPC 13", "Cold, discohesive", 'Cold, cohesive')) %>% 
   filter(., samples %in% colnames(tcga_tpm)) %>% 
   arrange(samples) %>% 
@@ -45,7 +45,7 @@ Heatmap(
   col = col_colors
 )
 
-write.csv(ssgsea_results, file = "C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\HALLMARKS_ssGSEA_TCGA_250424.csv")
+write.csv(ssgsea_results, file = "Temposeq\\TCGA_20250424\\HALLMARKS_ssGSEA_TCGA_250424.csv")
 
 ### 
 
@@ -65,7 +65,7 @@ Heatmap(
   col = col_colors
 )
 
-write.csv(ssgsea_results, file = "C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\GO_CC_ssGSEA_TCGA_250424.csv")
+write.csv(ssgsea_results, file = "Temposeq\\TCGA_20250424\\GO_CC_ssGSEA_TCGA_250424.csv")
 
 ###
 
@@ -85,7 +85,7 @@ Heatmap(
   col = col_colors
 )
 
-write.csv(ssgsea_results, file = "C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\GO_BP_ssGSEA_TCGA_250424.csv")
+write.csv(ssgsea_results, file = "Temposeq\\TCGA_20250424\\GO_BP_ssGSEA_TCGA_250424.csv")
 
 ###
 
@@ -105,4 +105,4 @@ Heatmap(
   col = col_colors
 )
 
-write.csv(ssgsea_results, file = "C:\\Users\\krakovic\\OneDrive - University of Glasgow\\Temposeq\\TCGA_20250424\\KEGG_ssGSEA_TCGA_250424.csv")
+write.csv(ssgsea_results, file = "Temposeq\\TCGA_20250424\\KEGG_ssGSEA_TCGA_250424.csv")

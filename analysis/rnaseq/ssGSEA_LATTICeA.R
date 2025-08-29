@@ -9,16 +9,16 @@ library(BiocParallel)
 library(parallel)
 library('exCITingpath')
 
-load("/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/LUADChohort.RData")
+load("./Temposeq/LUADChohort.RData")
 
 hallmarks <- loadDB("h.all.v2024.1.Hs.symbols.gmt")
 go_bp <- loadDB("GO_Biological_Process_2023.txt")
 kegg <- loadDB("KEGG_2021_Human.txt")
 
-cluster_labs <- read_csv('/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/merged_cluster_lym_log10_density_and_noise.csv') %>% 
+cluster_labs <- read_csv('./Temposeq/merged_cluster_lym_log10_density_and_noise.csv') %>% 
   select(c("HPC", "Supercluster"))
 
-cluster_annotations <- read_csv('/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
+cluster_annotations <- read_csv('./Temposeq/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
   column_to_rownames("...1")
 
 metadata <- LUADCohort$Metadata
@@ -63,7 +63,7 @@ metadata_subset_split$supercluster <- as.factor(metadata_subset_split$superclust
 
 ###
 
-hallmarks_ssgsea <- read_csv("/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters/all_LATTICeA_ssGSEA_hallmarks_norm.csv") %>% 
+hallmarks_ssgsea <- read_csv("./Temposeq/final_figures/v250331_superclusters/all_LATTICeA_ssGSEA_hallmarks_norm.csv") %>% 
   mutate(pathway = sub("^HALLMARK_", "", pathway)) %>% 
   column_to_rownames("pathway") %>% 
   select(rownames(metadata_subset_split))
@@ -107,7 +107,7 @@ p <- Heatmap(as.matrix(hallmarks_ssgsea) %>% pheatmap:::scale_rows(),
         name = "NES\nZ-score",
         cluster_columns = cluster_within_group(hallmarks_ssgsea %>% pheatmap:::scale_rows(), metadata_subset_split$supercluster))
 
-pdf(file = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters/LATTICeA_ssGSEA_hallmarks_20250425.pdf", 
+pdf(file = "./Temposeq/final_figures/v250331_superclusters/LATTICeA_ssGSEA_hallmarks_20250425.pdf", 
     width = 15, 
     height = 8.5)
 draw(p, heatmap_legend_side = "left", annotation_legend_side = "left", padding = unit(c(10, 2, 2, 30), "mm"))
@@ -115,7 +115,7 @@ dev.off()
 
 ###
 
-kegg_ssgsea <- read_csv("/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/KEGG_ssGSEA_LATTICeA.csv") %>% 
+kegg_ssgsea <- read_csv("./Temposeq/KEGG_ssGSEA_LATTICeA.csv") %>% 
   column_to_rownames("...1") %>% 
   select(rownames(metadata_subset))
 

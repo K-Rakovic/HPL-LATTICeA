@@ -12,16 +12,16 @@ library(ggpubr)
 library(ComplexHeatmap)
 library(circlize)
 
-load("/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/LUADChohort.RData")
+load("./Temposeq/LUADChohort.RData")
 
 hallmarks <- loadDB("h.all.v2024.1.Hs.symbols.gmt")
 go_bp <- loadDB("GO_Biological_Process_2023.txt")
 kegg <- loadDB("KEGG_2021_Human.txt")
 
-cluster_labs <- read_csv('/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/merged_cluster_lym_log10_density_and_noise.csv') %>% 
+cluster_labs <- read_csv('./Temposeq/merged_cluster_lym_log10_density_and_noise.csv') %>% 
   select(c("HPC", "Supercluster"))
 
-cluster_annotations <- read_csv('/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
+cluster_annotations <- read_csv('./Temposeq/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
   column_to_rownames("...1")
 
 metadata <- LUADCohort$Metadata
@@ -113,7 +113,7 @@ ggplot(cold_de, aes(x = log2FoldChange, y = mlog10p)) +
   theme(panel.grid = element_blank())
 
 ggsave("DE_COLD_VOLC.pdf",
-       path = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters",
+       path = "./Temposeq/final_figures/v250331_superclusters",
        scale = 0.4,
        width = 13,
        height = 9.5,
@@ -155,7 +155,7 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme(panel.grid = element_blank())
 
 ggsave("DE_COLD_GSEA_HALLMARKS_001.pdf",
-       path = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters",
+       path = "./Temposeq/final_figures/v250331_superclusters",
        scale = 0.4,
        width = 15,
        height = 7,
@@ -188,7 +188,7 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme(panel.grid = element_blank())
 
 ggsave("DE_COLD_GSEA_KEGG_001.pdf",
-       path = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters",
+       path = "./Temposeq/final_figures/v250331_superclusters",
        scale = 0.5,
        width = 16,
        height = 11,
@@ -224,7 +224,7 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme(panel.grid = element_blank())
 
 ggsave("DE_COLD_GSEA_GO_CC_001_n10.pdf",
-       path = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters",
+       path = "./Temposeq/final_figures/v250331_superclusters",
        scale = 0.4,
        width = 15,
        height = 7,
@@ -316,7 +316,7 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme(panel.grid = element_blank())
 
 ggsave("DE_COLD_GSEA_GO_BP_001.pdf",
-       path = "/Users/Kai/Library/CloudStorage/OneDrive-UniversityofGlasgow/Temposeq/final_figures/v250331_superclusters",
+       path = "./Temposeq/final_figures/v250331_superclusters",
        scale = 0.4,
        width = 20,
        height = 8,
