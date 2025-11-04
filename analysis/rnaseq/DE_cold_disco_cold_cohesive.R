@@ -12,16 +12,16 @@ library(ggpubr)
 library(ComplexHeatmap)
 library(circlize)
 
-load("./Temposeq/LUADChohort.RData")
+load("./LUADChohort.RData")
 
 hallmarks <- loadDB("h.all.v2024.1.Hs.symbols.gmt")
 go_bp <- loadDB("GO_Biological_Process_2023.txt")
 kegg <- loadDB("KEGG_2021_Human.txt")
 
-cluster_labs <- read_csv('./Temposeq/merged_cluster_lym_log10_density_and_noise.csv') %>% 
+cluster_labs <- read_csv('../../data/6-plex/merged_cluster_lym_log10_density_and_noise.csv') %>% 
   select(c("HPC", "Supercluster"))
 
-cluster_annotations <- read_csv('./Temposeq/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
+cluster_annotations <- read_csv('../../data/6-plex/bioclavis_pure_superclusters_split_HPC13.csv') %>% 
   column_to_rownames("...1")
 
 metadata <- LUADCohort$Metadata
@@ -49,7 +49,7 @@ reformat_core_id <- function(name) {
 metadata$core_id <- sapply(metadata$Core, reformat_core_id)
 metadata[, c("Core", "core_id")]
 
-metadata_subset = metadata[, c("...1", "core_id", "Sex")] %>%
+metadata_subset = metadata[, c("...1", "core_id")] %>%
   merge(., cluster_annotations, by.x=2, by.y=1) %>%
   column_to_rownames((var = '...1'))
 
@@ -69,11 +69,6 @@ cold_raw_counts <- cold_raw_counts[, row.names(cold_subset)]
 cold_raw_counts_filtered_genes <- round(cold_raw_counts, 0) %>%
   subset(., apply(cold_raw_counts, 1, mean) >= 1) %>% # Subset genes which have mean expr >= 1
   na.omit(.)
-
-# gene_vars <- apply(cold_raw_counts, 1, var)
-# variance_threshold <- quantile(gene_vars, 0.25)
-# cold_raw_counts_filtered_genes <- cold_raw_counts[gene_vars > variance_threshold, ] %>% 
-#   round(., 0)
 
 cold_raw_counts_matrix <- as.matrix(cold_raw_counts_filtered_genes)
 cold_subset$supercluster <- factor(cold_subset$supercluster)
@@ -113,7 +108,7 @@ ggplot(cold_de, aes(x = log2FoldChange, y = mlog10p)) +
   theme(panel.grid = element_blank())
 
 ggsave("DE_COLD_VOLC.pdf",
-       path = "./Temposeq/final_figures/v250331_superclusters",
+       path = "./",
        scale = 0.4,
        width = 13,
        height = 9.5,
@@ -154,8 +149,8 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme_bw() + 
   theme(panel.grid = element_blank())
 
-ggsave("DE_COLD_GSEA_HALLMARKS_001.pdf",
-       path = "./Temposeq/final_figures/v250331_superclusters",
+ggsave("DE_COLD_GSEA_HALLMARKS_p001.pdf",
+       path = "./",
        scale = 0.4,
        width = 15,
        height = 7,
@@ -187,8 +182,8 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme_bw() + 
   theme(panel.grid = element_blank())
 
-ggsave("DE_COLD_GSEA_KEGG_001.pdf",
-       path = "./Temposeq/final_figures/v250331_superclusters",
+ggsave("DE_COLD_GSEA_KEGG_p001.pdf",
+       path = "./",
        scale = 0.5,
        width = 16,
        height = 11,
@@ -224,7 +219,7 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme(panel.grid = element_blank())
 
 ggsave("DE_COLD_GSEA_GO_CC_001_n10.pdf",
-       path = "./Temposeq/final_figures/v250331_superclusters",
+       path = "./",
        scale = 0.4,
        width = 15,
        height = 7,
@@ -315,8 +310,8 @@ ggplot(top_pathways, aes(x = reorder(pathway, NES), y = NES, fill = mlog10p)) +
   theme_bw() + 
   theme(panel.grid = element_blank())
 
-ggsave("DE_COLD_GSEA_GO_BP_001.pdf",
-       path = "./Temposeq/final_figures/v250331_superclusters",
+ggsave("DE_COLD_GSEA_GO_BP_p001.pdf",
+       path = "./",
        scale = 0.4,
        width = 20,
        height = 8,
